@@ -27,11 +27,6 @@ export default function Layout({ children, home }) {
                     <h1 className={utilStyles.heading2Xl}>{name}</h1>
                 ) : (
                         <>
-                            <Link href="/">
-                                <a>
-                                    Adam
-                                </a>
-                            </Link>
                             <h2 className={utilStyles.headingLg}>
                                 <Link href="/">
                                     <a className={utilStyles.colorInherit}>{name}</a>

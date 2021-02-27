@@ -1,18 +1,10 @@
 import Head from 'next/head'
+import Link from 'next/link'
+
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 
 import { getSortedPosts } from '../lib/posts'
-
-export async function getStaticProps() {
-  const allPosts = getSortedPosts()
-
-  return {
-    props: {
-      allPosts
-    }
-  }
-}
 
 export default function Home({ allPosts }) {
   return (
@@ -35,7 +27,9 @@ export default function Home({ allPosts }) {
             <li className={utilStyles.listItem} key={id}>
               {title}
               <br />
-              {id}
+              <Link href={`/posts/${id}`}>
+                <a>{id}</a>
+              </Link>
               <br />
               {date}
             </li>
@@ -44,4 +38,14 @@ export default function Home({ allPosts }) {
       </section>
     </Layout>
   )
+}
+
+export async function getStaticProps() {
+  const allPosts = getSortedPosts()
+
+  return {
+    props: {
+      allPosts
+    }
+  }
 }
