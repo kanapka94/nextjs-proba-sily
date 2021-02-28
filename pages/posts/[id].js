@@ -1,12 +1,22 @@
-import Layout from '../../components/layout'
+import Head from 'next/head'
+import Layout from '../../components/Layout'
+import Date from '../../components/Date'
+
+import utilStyles from '../../styles/utils.module.css'
 
 import { getAllPostsIds, getPost } from '../../lib/posts'
 
 export default function Post({ post }) {
     return <Layout>
+        <Head>
+            <title>{post.title}</title>
+        </Head>
         {post.title}<br />
         {post.id}<br />
-        {post.date}<br />
+        <div className={utilStyles.lightText}>
+            <Date dateString={post.date} />
+        </div>
+        <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
     </Layout>
 }
 
@@ -20,7 +30,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const post = getPost(params.id)
+    const post = await getPost(params.id)
 
     return {
         props: {
